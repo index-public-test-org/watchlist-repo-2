@@ -9,17 +9,6 @@ jobs:
   trigger-index-update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Get commit info
-        id: commit
-        run: |
-          echo "sha=${{ github.sha }}" >> $GITHUB_OUTPUT
-          echo "timestamp=$(git log -1 --format='%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
-      
       - name: Trigger Index Update Workflow
         env:
           GH_TOKEN: ${{ secrets.GH_INDEX_REPO_TRIGGER_PAT }}
@@ -27,5 +16,5 @@ jobs:
           gh workflow run process-event.yml --repo ${{ secrets.GH_INDEX_REPO_URL }}             -f event_type="observe-commit"             -f event_payload='{
               "repository": "${{ github.repository }}",
               "commit": "${{ github.sha }}",
-              "timestamp": "${{ steps.commit.outputs.timestamp }}"
+              "timestamp": "${{ github.event.head_commit.timestamp }}"
             }'
