@@ -1,4 +1,4 @@
-name: Trigger GitHub Index Update
+name: Trigger GitHub Index Update 
 
 on:
   push:
