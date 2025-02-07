@@ -13,4 +13,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_INDEX_REPO_TRIGGER_PAT }}
         run: |
-          gh workflow run watchlist-repo-2-updated-trigger.yml --repo ${{ secrets.GH_INDEX_REPO_URL }}
+          gh workflow run watchlist-repo-2-updated.yml --repo ${{ secrets.GH_INDEX_REPO_URL }}
