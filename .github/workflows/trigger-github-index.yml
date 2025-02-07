@@ -1,0 +1,16 @@
+name: Trigger GitHub Index Update
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger-index-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Index Update Workflow
+        env:
+          GH_TOKEN: ${{ secrets.GH_INDEX_REPO_TRIGGER_PAT }}
+        run: |
+          gh workflow run watchlist-repo-2-updated-trigger.yml --repo ${{ secrets.GH_INDEX_REPO_URL }}
