@@ -1,4 +1,4 @@
-name: Trigger GitHub Index Update (branch test)
+name: Trigger GitHub Index Update
 
 on:
   push:
@@ -9,8 +9,18 @@ jobs:
   trigger-index-update:
     runs-on: ubuntu-latest
     steps:
+      - name: Get commit info
+        id: commit
+        run: |
+          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "timestamp=$(git show -s --format=%cI HEAD)" >> $GITHUB_OUTPUT
+      
       - name: Trigger Index Update Workflow
         env:
           GH_TOKEN: ${{ secrets.GH_INDEX_REPO_TRIGGER_PAT }}
         run: |
-          gh workflow run watchlist-repo-2-updated.yml --repo ${{ secrets.GH_INDEX_REPO_URL }}
+          gh workflow run process-event.yml --repo ${{ secrets.GH_INDEX_REPO_URL }}             -f event_type="observe-commit"             -f event_payload='{
+              "repository": "${{ github.repository }}",
+              "commit": "${{ steps.commit.outputs.sha }}",
+              "timestamp": "${{ steps.commit.outputs.timestamp }}"
+            }'
