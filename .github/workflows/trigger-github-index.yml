@@ -7,7 +7,7 @@ on:
 
 jobs:
   trigger-index-update:
-    runs-on: ghcr.io/cirruslabs/macos-runner:sonoma
+    runs-on: ubuntu-latest
     steps:
       - name: Trigger Index Update Workflow
         env:
