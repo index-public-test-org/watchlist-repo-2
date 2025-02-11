@@ -1,0 +1,15 @@
+{
+  "originHash": "62656e4c3c27258c5303b97b703ffbc31ead586f4b5db8d650376c52350f0114",
+  "pins": [
+    {
+      "identity": "watchlist-repo-1",
+      "kind": "remoteSourceControl",
+      "location": "https://github.com/index-public-test-org/watchlist-repo-1.git",
+      "state": {
+        "branch": "main",
+        "revision": "74c10a154966adbffdc6addcd8d0be1909622397"
+      }
+    }
+  ],
+  "version": 3
+}
